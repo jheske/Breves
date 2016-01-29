@@ -38,9 +38,13 @@ public class ArticleDetailActivity extends ActionBarActivity
     private View mUpButtonContainer;
     private View mUpButton;
 
+    public static final String ARTICLE_ID_EXTRA = "ARTICLE_ID_EXTRA";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
@@ -99,14 +103,23 @@ public class ArticleDetailActivity extends ActionBarActivity
             });
         }
 
+        /**
+         * Intent that started the Activity contains the id
+         * of the Article the user selected.
+         */
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
-                mStartId = ItemsContract.Items.getItemId(getIntent().getData());
+                mStartId = getIntent().getLongExtra(ARTICLE_ID_EXTRA,0);
+                //mStartId = ItemsContract.Items.getItemId(getIntent().getData());
                 mSelectedItemId = mStartId;
             }
         }
     }
 
+    /**
+     * Query database for all articles. This activity allows the user
+     * can swipe left/right to page through them.
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return ArticleLoader.newAllArticlesInstance(this);

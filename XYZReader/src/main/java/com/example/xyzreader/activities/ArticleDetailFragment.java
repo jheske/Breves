@@ -30,6 +30,7 @@ import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.ui.DrawInsetsFrameLayout;
 //import com.example.xyzreader.ui.ImageLoaderHelper;
 import com.example.xyzreader.ui.ObservableScrollView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +39,9 @@ import butterknife.ButterKnife;
  * A fragment representing a single Article detail screen. This fragment is
  * either contained in a {@link ArticleListActivity} in two-pane mode (on
  * tablets) or a {@link ArticleDetailActivity} on handsets.
+ *
+ * SlidingTabStrip and SlidingTabView
+ * http://stackoverflow.com/questions/31194199/how-to-enable-horizontal-scroll-in-tab-like-google-play
  */
 public class ArticleDetailFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -56,7 +60,7 @@ public class ArticleDetailFragment extends Fragment implements
 
     private int mTopInset;
     private View mPhotoContainerView;
-    private ImageView mPhotoView;
+  //  private ImageView mPhotoView;
     private int mScrollY;
     private boolean mIsCard = false;
     private int mStatusBarFullOpacityBottom;
@@ -68,7 +72,7 @@ public class ArticleDetailFragment extends Fragment implements
     @Bind(R.id.article_body)
     TextView tvBody;
     @Bind(R.id.photo)
-    ImageView tvPhoto;
+    ImageView imgPhoto;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -162,7 +166,7 @@ public class ArticleDetailFragment extends Fragment implements
 
     private void updateStatusBar() {
         int color = 0;
-        if (mPhotoView != null && mTopInset != 0 && mScrollY > 0) {
+        if (imgPhoto != null && mTopInset != 0 && mScrollY > 0) {
             float f = progress(mScrollY,
                     mStatusBarFullOpacityBottom - mTopInset * 3,
                     mStatusBarFullOpacityBottom - mTopInset);
@@ -219,6 +223,11 @@ public class ArticleDetailFragment extends Fragment implements
                         + mCursor.getString(ArticleLoader.Query.AUTHOR)
                         + "</font>"));
         tvBody.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+        String photoUrl = mCursor.getString(ArticleLoader.Query.PHOTO_URL);
+        Log.d(TAG,"photoUrl = " + photoUrl);
+        Picasso.with(getActivity()).load(photoUrl)
+                .into(imgPhoto);
+        updateStatusBar();
 /*
         ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                 .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
@@ -274,13 +283,13 @@ public class ArticleDetailFragment extends Fragment implements
     }
 
     public int getUpButtonFloor() {
-        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
+        if (mPhotoContainerView == null || imgPhoto.getHeight() == 0) {
             return Integer.MAX_VALUE;
         }
 
         // account for parallax
         return mIsCard
-                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
-                : mPhotoView.getHeight() - mScrollY;
+                ? (int) mPhotoContainerView.getTranslationY() + imgPhoto.getHeight() - mScrollY
+                : imgPhoto.getHeight() - mScrollY;
     }
 }

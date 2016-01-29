@@ -13,7 +13,7 @@ import android.os.RemoteException;
 import android.text.format.Time;
 import android.util.Log;
 
-import com.example.xyzreader.Utils;
+import com.example.xyzreader.utils.Utils;
 import com.example.xyzreader.model.Article;
 import com.example.xyzreader.retrofit.ApiService;
 import com.example.xyzreader.retrofit.XyzApplication;

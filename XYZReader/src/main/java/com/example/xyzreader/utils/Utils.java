@@ -16,7 +16,7 @@
  * -->
  */
 
-package com.example.xyzreader;
+package com.example.xyzreader.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

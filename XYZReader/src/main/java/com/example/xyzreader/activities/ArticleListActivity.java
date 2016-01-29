@@ -13,16 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
-import com.example.xyzreader.data.ArticleRvAdapter;
 import com.example.xyzreader.data.ItemsContract;
+import com.example.xyzreader.utils.ArticleRvAdapter;
 import com.example.xyzreader.data.UpdaterService;
+import com.example.xyzreader.model.Article;
+import com.example.xyzreader.utils.ArticlesRVTouchListener;
+import com.facebook.stetho.Stetho;
 //import com.example.xyzreader.ui.DynamicHeightNetworkImageView;
 //import com.example.xyzreader.ui.ImageLoaderHelper;
 
@@ -39,6 +39,16 @@ public class ArticleListActivity extends AppCompatActivity implements
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private ArticleRvAdapter mArticleRvAdapter;
+    private int mLastPosition;
+
+    /**
+     * Set up interface to handle onClick
+     * This could also handle have methods to handle
+     * onLongPress, or other gestures.
+     */
+    public interface ArticleClickListener {
+        void onClick(View view, int position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,8 @@ public class ArticleListActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             refresh();
         }
+        //For viewing database and other metrics in Chrome
+        setupStetho();
     }
 
     private void setupRecyclerView() {
@@ -70,6 +82,26 @@ public class ArticleListActivity extends AppCompatActivity implements
         StaggeredGridLayoutManager sglm =
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(sglm);
+        mRecyclerView.addOnItemTouchListener(new ArticlesRVTouchListener(this,
+                mRecyclerView, new ArticleClickListener() {
+            /**
+             * onClick called back from the GestureDetector
+             */
+            @Override
+            public void onClick(View view, int position) {
+                mLastPosition = position;
+                mArticleRvAdapter.moveCursorToPosition(mLastPosition);
+                startArticleDetailActivity(mArticleRvAdapter.getItemId(mLastPosition));
+            }
+        }));
+    }
+
+    private void startArticleDetailActivity(long articleId) {
+        Intent intent = new Intent(this, ArticleDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong(ArticleDetailActivity.ARTICLE_ID_EXTRA, 45);
+        intent.putExtras(bundle);
+        this.startActivity(intent);
     }
 
     private void refresh() {
@@ -126,4 +158,20 @@ public class ArticleListActivity extends AppCompatActivity implements
         mArticleRvAdapter.swapCursor(null);
     }
 
+
+    /**
+     * A very useful library for debugging Android apps
+     * using Chrome, even has a database inspector!
+     * <p/>
+     * chrome://inspect
+     */
+    private void setupStetho() {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(
+                                Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(
+                                Stetho.defaultInspectorModulesProvider(this))
+                        .build());
+    }
 }

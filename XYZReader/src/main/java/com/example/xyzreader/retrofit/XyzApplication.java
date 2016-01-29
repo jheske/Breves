@@ -2,7 +2,7 @@ package com.example.xyzreader.retrofit;
 
 import android.app.Application;
 
-import com.example.xyzreader.Utils;
+import com.example.xyzreader.utils.Utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 

@@ -1,4 +1,4 @@
-package com.example.xyzreader.data;
+package com.example.xyzreader.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.xyzreader.R;
-import com.example.xyzreader.activities.ArticleListActivity;
 //import com.example.xyzreader.ui.DynamicHeightNetworkImageView;
 //import com.example.xyzreader.ui.ImageLoaderHelper;
+import com.example.xyzreader.data.ArticleLoader;
+import com.example.xyzreader.data.ItemsContract;
+import com.example.xyzreader.model.Article;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -61,13 +63,13 @@ public class ArticleRvAdapter
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_article, parent, false);
         final ArticleViewHolder vh = new ArticleViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
+      /*  view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW,
                         ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
             }
-        });
+        }); */
         return vh;
     }
 
@@ -87,15 +89,15 @@ public class ArticleRvAdapter
         holder.tvSubtitleView.setText(subtitle);
         Picasso.with(mContext).load(thumbUrl)
                 .into(holder.imgThumbnailView);
-      /*  holder.thumbnailView.setImageUrl(
-                mCursor.getString(ArticleLoader.Query.THUMB_URL),
-                ImageLoaderHelper.getInstance(mContext).getImageLoader());
-        holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO)); */
     }
 
     public void swapCursor(Cursor newCursor) {
         mCursor = newCursor;
         notifyDataSetChanged();
+    }
+
+    public void moveCursorToPosition(int position) {
+        mCursor.moveToPosition(position);
     }
 
     @Override

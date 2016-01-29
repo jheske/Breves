@@ -1,5 +1,7 @@
 package com.example.xyzreader.model;
 
+import android.database.Cursor;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -23,6 +25,20 @@ public class Article {
     @JsonProperty("published_date")
     String mPublishedDate;
 
+    public void Article() {
+
+    }
+
+   /* public Article (Cursor cursor) {
+        mAuthor = "Jill";
+        mBody = "This is the text of my great article";
+        mTitle = "My Great Article";
+        mAspectRatio = "1.5";
+        mId = "385";
+        mThumb = "https://dl.dropboxusercontent.com/u/231329/xyzreader_data/thumbs/p004.jpg";
+        mPhoto = "https://dl.dropboxusercontent.com/u/231329/xyzreader_data/images/p004.jpg";
+    } */
+
     public String getId() {
         return mId;
     }
@@ -42,7 +58,6 @@ public class Article {
     public String getThumb() {
         return mThumb;
     }
-
 
     public String getPhoto() {
         return mPhoto;
