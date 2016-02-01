@@ -1,0 +1,36 @@
+<resources>
+    <!-- detail -->
+    <dimen name="detail_title_text_size">32sp</dimen>
+    <dimen name="detail_body_text_size">22sp</dimen>
+    <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
+
+    <dimen name="fab_elevation">2dp</dimen>
+    <dimen name="fab_press_translation_z">8dp</dimen>
+    <!-- Material -->
+    <dimen name="screen_edge_margin_left">16dp</dimen>
+    <dimen name="screen_edge_margin_right">16dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card__text_margin">8dp</dimen>
+    <dimen name="list_item_title_margin_left">72dp</dimen>
+    <dimen name="content_area_vertical_spacer">8dp</dimen>
+    <dimen name="fab_button_size">56dp</dimen>
+    <dimen name="fab_share_margin">88dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- list -->
+    <dimen name="list_side_margin">4dp</dimen>
+    <dimen name="list_toolbar_side_margin">0dp</dimen>
+    <integer name="list_column_count">2</integer>
+
+    <!-- detail -->
+    <bool name="detail_is_card">false</bool>
+    <dimen name="detail_photo_height">304dp</dimen>
+    <dimen name="detail_card_top_margin">@dimen/detail_photo_height</dimen>
+    <dimen name="detail_inner_horiz_margin">16dp</dimen>
+    <dimen name="detail_card_max_width">10000dp</dimen> <!-- force match_parent -->
+    <dimen name="detail_metabar_vert_padding">16dp</dimen>
+    <dimen name="detail_metabar_title_bottom_padding">4dp</dimen>
+    <dimen name="detail_body_top_margin">16dp</dimen>
+    <dimen name="detail_body_bottom_margin">88dp</dimen>
+    <dimen name="detail_backdrop_height">300dp</dimen>
+</resources>

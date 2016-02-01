@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="md_white_1000">#ffffff</color>
+    <color name="md_white_1000_70">#B3ffffff</color>
+    <color name="md_white_1000_30">#4Dffffff</color>
+    <color name="md_black_1000_26">#43000000</color>
+
+
+    <!-- Material color scheme -->
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorPrimaryLight">#FFCDD2</color>
+    <color name="colorAccent">#5DEBDB</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#727272</color>
+    <color name="textColorHint">#43000000</color>
+    <color name="colorHighlight">#B6B6B6</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="statusBarColor">@color/colorPrimary</color>
+    <color name="navigationBarColor">@android:color/black</color>
+
+    <color name="toolbarTextColorPrimary">@color/md_white_1000</color>
+    <!-- Toolbar Secondary text -->
+    <color name="toolbarTextColorSecondary">@color/md_white_1000_70</color>
+    <!-- Toolbar Hint and disabled text and icons -->
+    <color name="toolbarTextColorHint">@color/md_white_1000_30</color>
+</resources>
