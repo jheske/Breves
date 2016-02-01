@@ -36,7 +36,7 @@ public class XyzApplication extends Application {
     private void setupRestAdapter() {
         OkHttpClient client = new OkHttpClient();
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
         client.interceptors().add(interceptor);
 
         mRetrofit = new Retrofit.Builder()

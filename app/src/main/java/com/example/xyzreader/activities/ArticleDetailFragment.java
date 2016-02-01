@@ -2,6 +2,7 @@ package com.example.xyzreader.activities;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -19,13 +21,12 @@ import android.widget.TextView;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
-import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by jill on 1/29/16.
@@ -33,7 +34,7 @@ import butterknife.ButterKnife;
 public class ArticleDetailFragment extends Fragment {
 
     private static final String TAG = ArticleDetailFragment.class.getName();
-    private ObservableScrollView mScrollView;
+  //  private ObservableScrollView mScrollView;
     public static final String ARTICLE_ID_EXTRA = "ARTICLE_ID_EXTRA";
     private long mArticleId;
     private Cursor mCursor;
@@ -49,8 +50,8 @@ public class ArticleDetailFragment extends Fragment {
     TextView tvByLine;
     @Bind(R.id.article_body)
     TextView tvBody;
-    @BindString(R.string.error_implement_method)
-    String errorMissingMethod;
+    @BindString(R.string.article_by)
+    String mBy;
 
     /**
      * Called by ViewPager (see ArticleDetailActivity)
@@ -84,11 +85,9 @@ public class ArticleDetailFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mScrollView = (ObservableScrollView) view.findViewById(R.id.scrollView);
-        MaterialViewPagerHelper.registerScrollView(getActivity(), mScrollView, null);
+    @Override public void onDestroyView() {
+        ButterKnife.unbind(this);
+        super.onDestroyView();
     }
 
     private void getArticleData(long articleId) {
@@ -102,7 +101,7 @@ public class ArticleDetailFragment extends Fragment {
                 mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
                 System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                 DateUtils.FORMAT_ABBREV_ALL).toString();
-        mByLine = mDate + " by " + mAuthor;
+        mByLine = mBy + mAuthor + " | " + mDate;
         mBody = mCursor.getString(ArticleLoader.Query.BODY);
     }
 

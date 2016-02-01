@@ -10,4 +10,5 @@
     <string name="desc_title">Image Thumbnail</string>
     <string name="txt_backdrop">Article Backdrop Image</string>
     <string name="error_implement_method">You must implement method.</string>
+    <string name="article_by">"by "</string>
 </resources>

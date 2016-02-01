@@ -71,10 +71,10 @@ public class ArticleRvAdapter
         mCursor.moveToPosition(position);
         long publishedDate = mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE);
         String author = mCursor.getString(ArticleLoader.Query.AUTHOR);
-        String subtitle = DateUtils.getRelativeTimeSpanString(
+        String subtitle = " by " + author + "  " + DateUtils.getRelativeTimeSpanString(
                 publishedDate,System.currentTimeMillis(),
                 DateUtils.HOUR_IN_MILLIS,DateUtils.FORMAT_ABBREV_ALL).toString()
-                + " by " + author;
+                ;
         String thumbUrl = mCursor.getString(ArticleLoader.Query.THUMB_URL);
         Log.d(TAG, thumbUrl);
 

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,7 +32,7 @@
 
                 <TextView
                     android:id="@+id/article_title"
-                    style="?android:attr/textAppearanceLarge"
+                    style="@style/TextAppearance.AppCompat.Headline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorPrimary"
@@ -42,21 +41,22 @@
 
                 <TextView
                     android:id="@+id/article_byline"
-                    style="?android:attr/textAppearanceMedium"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:textColor="@color/textColorSecondary"
                     tools:text="June 1, 2001 by Author" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/article_body"
-                style="?android:attr/textAppearanceMedium"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:textColor="@color/textColorPrimary"
                 android:textColorLink="@color/textColorPrimary"
-                android:textSize="@dimen/detail_body_text_size"
                 tools:text="This is some sample text\nwith several lines of text\nand another line" />
         </LinearLayout>
     </android.support.v7.widget.CardView>

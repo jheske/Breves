@@ -1,11 +1,13 @@
 package com.example.xyzreader.activities;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.xyzreader.R;
@@ -22,6 +25,7 @@ import com.example.xyzreader.data.ArticleLoader;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 
 /**
@@ -35,19 +39,22 @@ public class ArticleDetailActivity extends AppCompatActivity
     private ViewPager mViewPager;
     FragmentStatePagerAdapter mPagerAdapter;
     private long mArticleId;
+    private String mArticleTitle;
     public static final String ARTICLE_ID_EXTRA = "ARTICLE_ID_EXTRA";
 
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout mCollapsingToolbar;
     @Bind(R.id.img_backdrop)
     ImageView imgBackdrop;
+    @BindString(R.string.article_by)
+    String mBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_detail);
         ButterKnife.bind(this);
-
+        setupFab();
         /**
          * Intent that started the Activity contains the id
          * of the Article the user selected.
@@ -61,6 +68,21 @@ public class ArticleDetailActivity extends AppCompatActivity
         setTitle("");
         setupViewPager();
         getSupportLoaderManager().initLoader(0, null, this);
+    }
+
+    private void setupFab() {
+        FloatingActionButton fabShare = (FloatingActionButton) findViewById(R.id.fab_share);
+
+        fabShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(Intent
+                        .createChooser(ShareCompat.IntentBuilder.from(ArticleDetailActivity.this)
+                                .setType("text/plain")
+                                .setText(mArticleTitle)
+                                .getIntent(), getString(R.string.action_share)));
+            }
+        });
     }
 
     private void setupViewPager() {
@@ -115,6 +137,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                     return;
                 mCursor.moveToPosition(position);
                 onArticleChanged(mCursor.getString(ArticleLoader.Query.PHOTO_URL));
+                mArticleTitle = mCursor.getString(ArticleLoader.Query.TITLE);
                 mArticleId = mCursor.getLong(ArticleLoader.Query._ID);
             }
 
