@@ -7,7 +7,7 @@
     tools:context="com.example.jill.materialviewpager_test.MainActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar_layout"
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
@@ -20,7 +20,17 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragment_articles_list"
+        android:name="com.example.xyzreader.activities.MainActivityFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        tools:context="com.example.xyzreader.activities.MainActivityFragment"
+        tools:layout="@android:layout/list_content" />
+
+<!--    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,5 +45,5 @@
             android:paddingRight="@dimen/list_side_margin"
             android:paddingTop="32dp"
             android:scrollbarStyle="outsideOverlay" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>-->
 </android.support.design.widget.CoordinatorLayout>

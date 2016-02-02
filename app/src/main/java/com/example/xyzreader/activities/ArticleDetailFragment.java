@@ -1,16 +1,10 @@
 package com.example.xyzreader.activities;
 
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -21,12 +15,10 @@ import android.widget.TextView;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by jill on 1/29/16.
@@ -72,7 +64,7 @@ public class ArticleDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_activity_article_detail, container, false);
         ButterKnife.bind(this, rootView);
 
         if (getArguments() != null) {

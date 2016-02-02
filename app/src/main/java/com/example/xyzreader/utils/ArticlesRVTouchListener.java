@@ -6,7 +6,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.xyzreader.activities.MainActivity;
+import com.example.xyzreader.activities.MainActivityFragment;
 
 /****************************************************************************
  * The MovieRecyclerTouchListener class sets up the RecyclerView's gesture
@@ -14,14 +14,14 @@ import com.example.xyzreader.activities.MainActivity;
  */
 public class ArticlesRVTouchListener implements RecyclerView.OnItemTouchListener {
     private GestureDetector mGestureDetector;
-    private MainActivity.ArticleClickListener mClickListener;
+    private MainActivityFragment.ArticleClickListener mClickListener;
 
     /**
      * Set up Simple listener to detect singleTapUp .  I can add
      * additional gestures later, like onLongPress, if I want.
      */
     public ArticlesRVTouchListener(Context context, RecyclerView recyclerView,
-                                   MainActivity.ArticleClickListener clickListener) {
+                                   MainActivityFragment.ArticleClickListener clickListener) {
         mClickListener = clickListener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override

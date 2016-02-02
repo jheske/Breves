@@ -11,9 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7af8358-d821-4038-aec7-d58a37aad03a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_article_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_article_detail.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivityFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_two_panes.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_activity_main.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_article_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_activity_article_detail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/utils/ArticlesRVTouchListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/utils/ArticlesRVTouchListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_article.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_article.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xyzreader.iws" />
@@ -145,43 +150,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ArticleDetailActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailActivity.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30539772">
-              <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1669#1688#1" expanded="true" />
-                <element signature="e#2545#2989#0" expanded="true" />
-                <element signature="e#2930#2962#0" expanded="true" />
-                <element signature="e#2988#2989#0" expanded="true" />
+                <element signature="e#4511#4512#0" expanded="true" />
+                <element signature="e#4579#4580#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_article_detail.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_article_detail.xml">
+      <file leaf-file-name="MainActivityFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivityFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-43.909092">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.31578946">
+              <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
               <folding>
-                <element signature="e#424#464#0" expanded="true" />
-                <element signature="e#665#685#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1972#2026#0" expanded="true" />
+                <element signature="e#2560#2955#0" expanded="true" />
+                <element signature="e#2954#2955#0" expanded="true" />
+                <element signature="e#3432#3433#0" expanded="true" />
+                <element signature="e#3514#3515#0" expanded="true" />
               </folding>
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_article_detail.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_article_detail.xml">
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.181818">
-              <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+            <state vertical-scroll-proportion="-10.30303">
+              <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -190,15 +194,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java">
+      <file leaf-file-name="fragment_activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-2.090909">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2442,10 +2447,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/XYZReader/src/main/java/com/example/xyzreader/utils/ArticleRvAdapter.java" />
-        <option value="$PROJECT_DIR$/XYZReader/src/main/res/layout/article_detail_activity.xml" />
-        <option value="$PROJECT_DIR$/XYZReader/src/main/java/com/example/xyzreader/activities/ArticleListActivity.java" />
-        <option value="$PROJECT_DIR$/XYZReader/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/XYZReader/src/main/res/layout/fragment_article_detail.xml" />
         <option value="$PROJECT_DIR$/XYZReader/src/main/res/layout/list_item_article.xml" />
         <option value="$PROJECT_DIR$/XYZReader/src/main/res/drawable/add_fab_background.xml" />
@@ -2482,17 +2483,21 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values-sw600dp/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/ui/ScrollAwareFABBehavior.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/utils/ArticleRvAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/retrofit/XyzApplication.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_article.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_article_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_article_detail.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_article.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_two_panes.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/utils/ArticlesRVTouchListener.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivityFragment.java" />
       </list>
     </option>
   </component>
@@ -3039,16 +3044,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="362" y="63" width="1623" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.258547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17735043" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47970086" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18162394" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32158118" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18162394" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31303418" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -3063,7 +3068,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.108726755" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26349208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3390476" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -3091,32 +3096,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/text/method/LinkMovementMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3022339">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.1.1/support-v4-23.1.1-sources.jar!/android/support/v4/app/Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3324573">
-          <caret line="721" column="25" selection-start-line="721" selection-start-column="25" selection-end-line="721" selection-end-column="25" />
-          <folding>
-            <element signature="e#25345#25346#0" expanded="false" />
-            <element signature="e#25391#25392#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/app/Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9645203">
-          <caret line="353" column="13" selection-start-line="353" selection-start-column="13" selection-end-line="353" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.1.1/appcompat-v7-23.1.1-sources.jar!/android/support/v7/app/AppCompatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3447,17 +3426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="53" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1651#1670#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/retrofit/XyzApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48640484">
@@ -3466,51 +3434,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_article.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.181818">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#610#630#0" expanded="true" />
+            <element signature="e#954#974#0" expanded="true" />
+            <element signature="e#1280#1305#0" expanded="true" />
+            <element signature="e#1339#1364#0" expanded="true" />
+            <element signature="e#1397#1422#0" expanded="true" />
+            <element signature="e#1841#1866#0" expanded="true" />
+            <element signature="e#1900#1925#0" expanded="true" />
+            <element signature="e#1958#1983#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-          <folding>
-            <element signature="e#1509#1534#0" expanded="true" />
-            <element signature="e#1568#1593#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_article.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-          <folding>
-            <element signature="e#313#333#0" expanded="true" />
-            <element signature="e#365#385#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_article_detail.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_two_panes.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-43.909092">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.2727275">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
           <folding>
-            <element signature="e#424#464#0" expanded="true" />
-            <element signature="e#665#685#0" expanded="true" />
+            <element signature="e#1877#1902#0" expanded="true" />
+            <element signature="e#1940#1965#0" expanded="true" />
+            <element signature="e#2714#2733#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3520,8 +3481,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_article_detail.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.181818">
-          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        <state vertical-scroll-proportion="-5.5757575">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -3529,16 +3490,94 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_activity_article_detail.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30539772">
-          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        <state vertical-scroll-proportion="-2.7878788">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/ArticleDetailFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="73" column="56" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1669#1688#1" expanded="true" />
-            <element signature="e#2545#2989#0" expanded="true" />
-            <element signature="e#2930#2962#0" expanded="true" />
-            <element signature="e#2988#2989#0" expanded="true" />
+            <element signature="e#1303#1322#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/utils/ArticlesRVTouchListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.090909">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.30303">
+          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/content/ContextWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3329646">
+          <caret line="579" column="25" selection-start-line="579" selection-start-column="25" selection-end-line="579" selection-end-column="25" />
+          <folding>
+            <element signature="e#16695#16696#0" expanded="true" />
+            <element signature="e#16745#16746#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4511#4512#0" expanded="true" />
+            <element signature="e#4579#4580#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xyzreader/activities/MainActivityFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31578946">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1972#2026#0" expanded="true" />
+            <element signature="e#2560#2955#0" expanded="true" />
+            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#3432#3433#0" expanded="true" />
+            <element signature="e#3514#3515#0" expanded="true" />
           </folding>
         </state>
       </provider>

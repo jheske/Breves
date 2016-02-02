@@ -40,37 +40,40 @@ import com.facebook.stetho.Stetho;
  * touched, lead to a {@link ArticleDetailActivity} representing item details. On tablets, the
  * activity presents a grid of items as cards.
  */
-public class MainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity
+      //  implements LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener
+{
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-    private ArticleRvAdapter mArticleRvAdapter;
-    private int mLastPosition;
+    //private SwipeRefreshLayout mSwipeRefreshLayout;
+    //private RecyclerView mRecyclerView;
+    //private ArticleRvAdapter mArticleRvAdapter;
+    //private int mLastPosition;
 
     /**
      * Set up interface to handle onClick
      * This could also handle have methods to handle
      * onLongPress, or other gestures.
      */
-    public interface ArticleClickListener {
-        void onClick(View view, int position);
-    }
+   // public interface ArticleClickListener {
+   //     void onClick(View view, int position);
+   // }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+        //mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        //mSwipeRefreshLayout.setOnRefreshListener(this);
         setupToolbar();
-        setupRecyclerView();
-        getSupportLoaderManager().initLoader(0, null, this);
+        //setupRecyclerView();
+        //getSupportLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
-            onRefresh();
+  //          onRefresh();
         }
+
+        setupFragments();
         //For viewing database and other metrics in Chrome
         setupStetho();
     }
@@ -80,7 +83,11 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
     }
 
-    private void setupRecyclerView() {
+    private void setupFragments() {
+
+    }
+
+ /*   private void setupRecyclerView() {
         int columnCount = getResources().getInteger(R.integer.list_column_count);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -94,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setLayoutManager(sglm);
         mRecyclerView.addOnItemTouchListener(new ArticlesRVTouchListener(this,
                 mRecyclerView, new ArticleClickListener() {
-            /**
+            *//**
              * onClick called back from the GestureDetector
-             */
+             *//*
             @Override
             public void onClick(View view, int position) {
                 mLastPosition = position;
@@ -114,17 +121,18 @@ public class MainActivity extends AppCompatActivity implements
         this.startActivity(intent);
     }
 
+
     @Override
     public void onRefresh() {
         startService(new Intent(this, UpdaterService.class));
     }
-
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                onRefresh();
+    //            onRefresh();
                 return true;
             default:
                 return false;
@@ -160,13 +168,13 @@ public class MainActivity extends AppCompatActivity implements
     };
 
     private void updateRefreshingUI() {
-        mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
+     //   mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
     }
 
     /**********************
      * LoaderManager
      **********************/
-    @Override
+/*    @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return ArticleLoader.newAllArticlesInstance(this);
     }
@@ -179,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mArticleRvAdapter.swapCursor(null);
-    }
+    }*/
 
 
     /**
