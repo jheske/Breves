@@ -1,7 +1,7 @@
 <a href="https://www.linkedin.com/pub/jill-heske/13/836/635"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Jill Heske's profile on LinkedIn"></a>
 
 
-## Synopsis
+## XyzReader
 
 ![XyzReader icon](https://github.com/jheske/XyzReader/blob/master/app/src/main/res/mipmap-xhdpi/ic_launcher.png?raw=true)
 
