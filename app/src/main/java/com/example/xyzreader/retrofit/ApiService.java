@@ -2,7 +2,6 @@ package com.example.xyzreader.retrofit;
 
 
 import com.example.xyzreader.model.Article;
-import com.example.xyzreader.model.Articles;
 
 import java.util.List;
 import java.util.Map;

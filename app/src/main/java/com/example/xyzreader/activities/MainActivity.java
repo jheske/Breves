@@ -4,36 +4,35 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 
 import com.example.xyzreader.R;
-import com.example.xyzreader.data.ArticleLoader;
-import com.example.xyzreader.utils.ArticleRvAdapter;
 import com.example.xyzreader.data.UpdaterService;
-import com.example.xyzreader.utils.ArticlesRVTouchListener;
+import com.example.xyzreader.retrofit.XyzApplication;
 import com.facebook.stetho.Stetho;
-
 
 //Floating Action Button behavior
 //https://guides.codepath.com/android/Floating-Action-Buttons
 
 /**
+ * Sample App
+ * https://github.com/google/iosched/blob/master/android/src/main/res/values/dimens.xml
+ * <p>
  * MATERIAL DESIGN LAYOUT Metrics and Keylines
  * https://www.google.com/design/spec/layout/metrics-keylines.html#metrics-keylines-keylines-spacing
- *
+ * <p>
  * TYPOGRAPHY
  * https://www.google.com/design/spec/style/typography.html#typography-styles
+ * <p>
+ * Icon
+ * http://www.iconarchive.com/show/seo-icons-by-thehoth/seo-article-icon.html
  */
+
 /**
  * An activity representing a list of Articles. This activity has different presentations for
  * handset and tablet-size devices. On handsets, the activity presents a list of items, which when
@@ -41,40 +40,45 @@ import com.facebook.stetho.Stetho;
  * activity presents a grid of items as cards.
  */
 public class MainActivity extends AppCompatActivity
-      //  implements LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener
-{
+        implements MainActivityFragment.MainActivityCallback {
 
-    //private SwipeRefreshLayout mSwipeRefreshLayout;
-    //private RecyclerView mRecyclerView;
-    //private ArticleRvAdapter mArticleRvAdapter;
-    //private int mLastPosition;
+    private final String TAG = getClass().getSimpleName();
+    MainActivityFragment mMainActivityFragment;
+    ArticleDetailFragment mArticleDetailFragment;
+    private boolean mTwoPaneLayout;
 
-    /**
-     * Set up interface to handle onClick
-     * This could also handle have methods to handle
-     * onLongPress, or other gestures.
-     */
-   // public interface ArticleClickListener {
-   //     void onClick(View view, int position);
-   // }
+    /**********************
+     * BroadcastReceiver
+     **********************/
+    private boolean mIsRefreshing = false;
+
+    private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (UpdaterService.BROADCAST_ACTION_STATE_CHANGE.equals(intent.getAction())) {
+                Log.d(TAG, "onReceive refreshing = " + mIsRefreshing);
+                mIsRefreshing = intent.getBooleanExtra(UpdaterService.EXTRA_REFRESHING, false);
+                mMainActivityFragment.updateRefreshingUI(mIsRefreshing);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        //mSwipeRefreshLayout.setOnRefreshListener(this);
+        //setContentView(R.layout.activity_main_one_pane);
+        //layout_activity_main is defined in values-xxx/layouts.xml
+        //Android will automatically load the correct one based on device size and orientation:
+        //  R.layout.layout_activity_main (portrait for all devices, landscape for phones)
+        //  R.layout.layout_activity_main (landscape for tablets only)
+        setContentView(R.layout.layout_activity_main);
         setupToolbar();
-        //setupRecyclerView();
-        //getSupportLoaderManager().initLoader(0, null, this);
-
-        if (savedInstanceState == null) {
-  //          onRefresh();
-        }
-
         setupFragments();
+        mMainActivityFragment.displayArticles();
+        if (savedInstanceState == null)
+            mMainActivityFragment.onRefresh();
         //For viewing database and other metrics in Chrome
+        //chrome://inspect
         setupStetho();
     }
 
@@ -84,33 +88,41 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupFragments() {
-
+        mTwoPaneLayout = getResources().getBoolean(R.bool.is_two_pane_layout);
+        mMainActivityFragment = ((MainActivityFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_articles_list_container));
+        if (mTwoPaneLayout) {
+            mArticleDetailFragment = ((ArticleDetailFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_article_detail_container));
+            setupFab();
+        }
     }
 
- /*   private void setupRecyclerView() {
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
+    private void setupFab() {
+        FloatingActionButton fabShare = (FloatingActionButton) findViewById(R.id.fab_share);
+        final Context context = this;
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        // set up adapter
-        mArticleRvAdapter = new ArticleRvAdapter(this);
-        mArticleRvAdapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(mArticleRvAdapter);
-        // set up layout manager
-        StaggeredGridLayoutManager sglm =
-                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(sglm);
-        mRecyclerView.addOnItemTouchListener(new ArticlesRVTouchListener(this,
-                mRecyclerView, new ArticleClickListener() {
-            *//**
-             * onClick called back from the GestureDetector
-             *//*
+        if (! ((XyzApplication) getApplication()).isNetworkAvailable()) {
+            fabShare.setVisibility(View.GONE);
+            return;
+        }
+        fabShare.setVisibility(View.VISIBLE);
+        fabShare.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view, int position) {
-                mLastPosition = position;
-                mArticleRvAdapter.moveCursorToPosition(mLastPosition);
-                startArticleDetailActivity(mArticleRvAdapter.getItemId(mLastPosition));
+            public void onClick(View v) {
+                Intent shareIntent = ArticleDetailFragment
+                        .getShareIntent(mArticleDetailFragment.getArticle(), context);
+                startActivity(Intent.createChooser(shareIntent,getString(R.string.share_article)));
             }
-        }));
+        });
+    }
+
+    @Override
+    public void onArticleSelected(long articleId, boolean userSelected) {
+        if (mTwoPaneLayout)
+            mArticleDetailFragment.displayArticle(articleId);
+        else if (userSelected)
+            startArticleDetailActivity(articleId);
     }
 
     private void startArticleDetailActivity(long articleId) {
@@ -118,25 +130,7 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = new Bundle();
         bundle.putLong(ArticleDetailActivity.ARTICLE_ID_EXTRA, articleId);
         intent.putExtras(bundle);
-        this.startActivity(intent);
-    }
-
-
-    @Override
-    public void onRefresh() {
-        startService(new Intent(this, UpdaterService.class));
-    }
-*/
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_refresh:
-    //            onRefresh();
-                return true;
-            default:
-                return false;
-        }
+        startActivity(intent);
     }
 
     @Override
@@ -152,48 +146,10 @@ public class MainActivity extends AppCompatActivity
         unregisterReceiver(mRefreshingReceiver);
     }
 
-    /**********************
-     * BroadcastReceiver
-     **********************/
-    private boolean mIsRefreshing = false;
-
-    private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (UpdaterService.BROADCAST_ACTION_STATE_CHANGE.equals(intent.getAction())) {
-                mIsRefreshing = intent.getBooleanExtra(UpdaterService.EXTRA_REFRESHING, false);
-                updateRefreshingUI();
-            }
-        }
-    };
-
-    private void updateRefreshingUI() {
-     //   mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
-    }
-
-    /**********************
-     * LoaderManager
-     **********************/
-/*    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return ArticleLoader.newAllArticlesInstance(this);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        mArticleRvAdapter.swapCursor(cursor);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        mArticleRvAdapter.swapCursor(null);
-    }*/
-
-
     /**
      * A very useful library for debugging Android apps
      * using Chrome, even has a database inspector!
-     * <p/>
+     * <p>
      * chrome://inspect
      */
     private void setupStetho() {

@@ -16,15 +16,11 @@
  * -->
  */
 
-package com.example.xyzreader.utils;
+package com.example.xyzreader;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class Utils {

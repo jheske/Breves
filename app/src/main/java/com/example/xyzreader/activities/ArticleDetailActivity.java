@@ -1,13 +1,11 @@
 package com.example.xyzreader.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -22,6 +20,7 @@ import android.widget.ImageView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
+import com.example.xyzreader.model.Article;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -32,22 +31,17 @@ import butterknife.ButterKnife;
  * Created by jill on 1/29/16.
  */
 public class ArticleDetailActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<Cursor> {
+        implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private final String TAG = getClass().getSimpleName();
-    private Cursor mCursor;
+    private static Cursor mCursor;
     private ViewPager mViewPager;
     FragmentStatePagerAdapter mPagerAdapter;
     private long mArticleId;
-    private String mArticleTitle;
     public static final String ARTICLE_ID_EXTRA = "ARTICLE_ID_EXTRA";
 
-    @Bind(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout mCollapsingToolbar;
     @Bind(R.id.img_backdrop)
     ImageView imgBackdrop;
-    @BindString(R.string.article_by)
-    String mBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +49,7 @@ public class ArticleDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_article_detail);
         ButterKnife.bind(this);
         setupFab();
+
         /**
          * Intent that started the Activity contains the id
          * of the Article the user selected.
@@ -64,23 +59,29 @@ public class ArticleDetailActivity extends AppCompatActivity
                 return;
             mArticleId = getIntent().getLongExtra(ArticleDetailFragment.ARTICLE_ID_EXTRA, 0);
         }
+        else
+            mArticleId = savedInstanceState.getLong(ArticleDetailFragment.ARTICLE_ID_EXTRA, 0);
 
         setTitle("");
         setupViewPager();
         getSupportLoaderManager().initLoader(0, null, this);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putLong(ArticleDetailFragment.ARTICLE_ID_EXTRA,mArticleId);
+    }
+
     private void setupFab() {
         FloatingActionButton fabShare = (FloatingActionButton) findViewById(R.id.fab_share);
+        final Context context = this;
 
         fabShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(Intent
-                        .createChooser(ShareCompat.IntentBuilder.from(ArticleDetailActivity.this)
-                                .setType("text/plain")
-                                .setText(mArticleTitle)
-                                .getIntent(), getString(R.string.action_share)));
+                Intent shareIntent
+                        = ArticleDetailFragment.getShareIntent(new Article(mCursor, context), context);
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_article)));
             }
         });
     }
@@ -136,8 +137,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                 if (mCursor == null)
                     return;
                 mCursor.moveToPosition(position);
-                onArticleChanged(mCursor.getString(ArticleLoader.Query.PHOTO_URL));
-                mArticleTitle = mCursor.getString(ArticleLoader.Query.TITLE);
+                displayBackdropImage(mCursor.getString(ArticleLoader.Query.PHOTO_URL));
                 mArticleId = mCursor.getLong(ArticleLoader.Query._ID);
             }
 
@@ -158,15 +158,21 @@ public class ArticleDetailActivity extends AppCompatActivity
         mCursor = cursor;
         mPagerAdapter.notifyDataSetChanged();
 
-        // Select the first article's id
         if (mArticleId > 0) {
+            // If article is first in the list, then no page change is required,
+            // so mViewPager.setCurrentItem won't call addOnPageChangeListener
+            // and displayBackdropImage won't get called.
             mCursor.moveToFirst();
+            if (mCursor.getLong(ArticleLoader.Query._ID) == mArticleId) {
+                displayBackdropImage(mCursor.getString(ArticleLoader.Query.PHOTO_URL));
+                return;
+            }
             // TODO: optimize
             while (!mCursor.isAfterLast()) {
                 if (mCursor.getLong(ArticleLoader.Query._ID) == mArticleId) {
                     final int position = mCursor.getPosition();
                     mViewPager.setCurrentItem(position);
-                    break;
+                    return;
                 }
                 mCursor.moveToNext();
             }
@@ -180,11 +186,11 @@ public class ArticleDetailActivity extends AppCompatActivity
         mPagerAdapter.notifyDataSetChanged();
     }
 
-    public void onArticleChanged(String backdropUrl) {
-        if(imgBackdrop == null)
+    public void displayBackdropImage(String imageUrl) {
+        if (imgBackdrop == null)
             return;
 
-        Picasso.with(this).load(backdropUrl)
+        Picasso.with(this).load(imageUrl)
                 .placeholder(R.drawable.placeholder_backdrop_w300)
                 .error(R.drawable.placeholder_backdrop_w300)
                 .into(imgBackdrop);

@@ -13,7 +13,7 @@ import android.os.RemoteException;
 import android.text.format.Time;
 import android.util.Log;
 
-import com.example.xyzreader.utils.Utils;
+import com.example.xyzreader.Utils;
 import com.example.xyzreader.model.Article;
 import com.example.xyzreader.retrofit.ApiService;
 import com.example.xyzreader.retrofit.XyzApplication;
@@ -43,16 +43,11 @@ public class UpdaterService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Time time = new Time();
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null || !ni.isConnected()) {
-            Log.w(TAG, "Not online, not refreshing.");
+        if (!Utils.isNetworkAvailable(this)) {
+            Log.w(TAG, "Network not available, not refreshing.");
             return;
         }
-
-        sendStickyBroadcast(
-                new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
+        sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, true));
         getArticles();
     }
 
@@ -71,7 +66,7 @@ public class UpdaterService extends IntentService {
             values.put(ItemsContract.Items.TITLE, article.getTitle());
             values.put(ItemsContract.Items.BODY, article.getBody());
             values.put(ItemsContract.Items.THUMB_URL, article.getThumb());
-            values.put(ItemsContract.Items.PHOTO_URL, article.getPhoto());
+            values.put(ItemsContract.Items.PHOTO_URL, article.getPhotoUrl());
             values.put(ItemsContract.Items.ASPECT_RATIO, article.getAspectRatio());
             time.parse3339(article.getPublishedDate());
             values.put(ItemsContract.Items.PUBLISHED_DATE, time.toMillis(false));
@@ -84,7 +79,7 @@ public class UpdaterService extends IntentService {
         } catch (OperationApplicationException e) {
             e.printStackTrace();
         }
-        sendStickyBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
+        sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
     }
 
     public void getArticles() {
@@ -96,7 +91,6 @@ public class UpdaterService extends IntentService {
         call.enqueue(new Callback<List<Article>>() {
             @Override
             public void onResponse(Response<List<Article>> response, Retrofit retrofit) {
-                Log.i(TAG, "Got results! Count = " + response.body().size());
                 if (response.isSuccess()) {
                     dbAddArticles(response.body());
                 }
@@ -105,6 +99,7 @@ public class UpdaterService extends IntentService {
             @Override
             public void onFailure(Throwable t) {
                 Utils.showToast(context, "Api call failed " + t.getMessage());
+                sendBroadcast(new Intent(BROADCAST_ACTION_STATE_CHANGE).putExtra(EXTRA_REFRESHING, false));
                 Log.i(TAG, "Api call error! " + t.getMessage());
             }
         });

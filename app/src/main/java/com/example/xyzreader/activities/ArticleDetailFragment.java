@@ -1,12 +1,15 @@
 package com.example.xyzreader.activities;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
+import com.example.xyzreader.model.Article;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -26,15 +30,10 @@ import butterknife.ButterKnife;
 public class ArticleDetailFragment extends Fragment {
 
     private static final String TAG = ArticleDetailFragment.class.getName();
-  //  private ObservableScrollView mScrollView;
     public static final String ARTICLE_ID_EXTRA = "ARTICLE_ID_EXTRA";
+    private Article mArticle;
     private long mArticleId;
     private Cursor mCursor;
-    private String mTitle="My Articles";
-    private String mAuthor;
-    private String mByLine;
-    private String mBody;
-    private String mDate;
 
     @Bind(R.id.article_title)
     TextView tvTitle;
@@ -42,8 +41,6 @@ public class ArticleDetailFragment extends Fragment {
     TextView tvByLine;
     @Bind(R.id.article_body)
     TextView tvBody;
-    @BindString(R.string.article_by)
-    String mBy;
 
     /**
      * Called by ViewPager (see ArticleDetailActivity)
@@ -70,8 +67,7 @@ public class ArticleDetailFragment extends Fragment {
         if (getArguments() != null) {
             if (getArguments().containsKey(ARTICLE_ID_EXTRA)) {
                 mArticleId = getArguments().getLong(ARTICLE_ID_EXTRA);
-                getArticleData(mArticleId);
-                displayArticle();
+                displayArticle(mArticleId);
             }
         }
         return rootView;
@@ -82,24 +78,39 @@ public class ArticleDetailFragment extends Fragment {
         super.onDestroyView();
     }
 
-    private void getArticleData(long articleId) {
+    /**
+     * Retrieve Article data from the database
+     *
+     * @param articleId
+     */
+    private Article dbGetArticle(long articleId) {
         ContentResolver contentResolver = getActivity().getContentResolver();
         mCursor = contentResolver.query(ItemsContract.Items.buildItemUri(articleId),
                 ArticleLoader.Query.PROJECTION, null, null, null);
         mCursor.moveToFirst();
-        mTitle = mCursor.getString(ArticleLoader.Query.TITLE);
-        mAuthor = mCursor.getString(ArticleLoader.Query.AUTHOR);
-        mDate = DateUtils.getRelativeTimeSpanString(
-                mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
-                System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
-                DateUtils.FORMAT_ABBREV_ALL).toString();
-        mByLine = mBy + mAuthor + " | " + mDate;
-        mBody = mCursor.getString(ArticleLoader.Query.BODY);
+        return new Article(mCursor,getActivity());
     }
 
-    private void displayArticle() {
-        tvTitle.setText(mTitle);
-        tvByLine.setText(Html.fromHtml(mByLine));
-        tvBody.setText(Html.fromHtml(mBody + mBody + mBody));
+    public void displayArticle(long articleId) {
+        mArticle = dbGetArticle(articleId);
+        tvTitle.setText(mArticle.getTitle());
+        tvByLine.setText(Html.fromHtml(mArticle.getByLine()));
+        tvBody.setText(Html.fromHtml(mArticle.getBody()));
+    }
+
+    public Article getArticle() {
+        return mArticle;
+    }
+
+    public static Intent getShareIntent(Article article,Context context) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, context.getString(R.string.share_subject));
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                article.getTitle() + "\n\n"
+                        + Html.fromHtml(article.getByLine()).toString() + "\n\n"
+                        + Html.fromHtml(article.getBody()).toString());
+        return shareIntent;
     }
 }
