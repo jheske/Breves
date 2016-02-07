@@ -34,10 +34,8 @@ Provides a FloatingActionButton for sharing articles.
 
 ## Screenshots
 
-<img src="landscape-master-detail.png" alt="Popcorn landscape master-detail" width="600">
-
-
-<img src="portrait-most-popular.png" alt="Popcorn home screen portrait" width="300"> <img src="portrait-movie-details.png" alt="Popcorn movie details" width="300">
+<img src="master-detail.png" alt="XyzReader landscape master-detail" width="600">
+<img src="portrait-main.png" alt="XyzReader home screen portrait" width="300"> <img src="portrait-detail.png" alt="XyzReader detail screen" width="300">
 
 
 
