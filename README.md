@@ -57,7 +57,7 @@ Provides a FloatingActionButton for sharing articles.
 
 ## Icon 
 
-http://www.iconarchive.com/show/button-ui-requests-2-icons-by-blackvariant/PopcornTime-icon.html
+http://www.iconarchive.com/show/button-ui-requests-2-icons-by-blackvariant/seo-article-icon.html
 
 
 ## Testing
